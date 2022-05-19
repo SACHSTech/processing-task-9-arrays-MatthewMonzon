@@ -1,36 +1,56 @@
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
-	
-	
+	//variables
+  float bluePlayerX = 400;
+  float bluePlayerY = 400;
+  float bpSizeX = 50;
+  float bpSizeY = 50;
+  float[] circleY = new float[25];
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
   public void settings() {
 	// put your size call here
-    size(400, 400);
+    size(800, 800);
   }
 
-  /** 
-   * Called once at the beginning of execution.  Add initial set up
-   * values here i.e background, stroke, fill etc.
-   */
   public void setup() {
-    background(210, 255, 173);
-  }
-
-  /**
-   * Called repeatedly, anything drawn to the screen goes here
-   */
-  public void draw() {
-	  
-	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
-
-    stroke(255);
-    line(50, 125, 70, 50);  
+    for (int i = 0; i < circleY.length; i++) {
+      circleY[i] = random(height);
+    }
   }
   
-  // define other methods down here.
+  public void draw() {
+    background(225, 235, 233);
+  
+    for (int i = 0; i < circleY.length; i++) {
+      float circleX = width * i / circleY.length;
+      fill(207, 224, 18);
+      ellipse(circleX, circleY[i], 25, 25);
+  
+      circleY[i]++;
+  
+      if (circleY[i] > height) {
+        circleY[i] = 0;
+      }
+    }
+    //create player ball
+    fill(4, 57, 191);
+    ellipse(bluePlayerX, bluePlayerY, bpSizeX, bpSizeY);
+
+    //create bounderies
+    if(bluePlayerX < 25) {
+      bluePlayerX -= -5;
+    }
+    else if (bluePlayerX > 775){
+      bluePlayerX -= -5;
+    }
+    if(bluePlayerY < 25) {
+      bluePlayerY -= -5;
+    }
+    else if (bluePlayerY > 775){
+      bluePlayerY -= -5;
+    }
+  }
 }
